@@ -1,0 +1,125 @@
+/* объявляем глобальные переменные */
+:root {
+  /* устанавливаем размер для стандартизации элементов */
+  --m: 4rem;
+  /* используемые цвета */
+  --red: #ff6565;
+  --pink: #ff64f9;
+  --purple: #6b5fff;
+  --blue: #4d8aff;
+  --green: #5bff89;
+  --yellow: #ffee55;
+  --orange: #ff6d1b;
+}
+
+/* общие настройки страницы */
+body {
+  /* фон */
+  background-color: #1c1c1c;
+  /* подключаем гибкую вёрстку */
+  display: flex;
+  /* выравниванием контент и содержимое по центру */
+  justify-content: center;
+  align-items: center;
+  /* высота — вся высота окна */
+  height: 100vh;
+  /* убираем все внешние отступы */
+  margin: 0;
+}
+
+/* кнопка */
+button {
+  /* задаём границу transparent это значит прозрачная, т.е. она есть просто ее не видно, а видно то что под ней*/
+  border: calc(0.08 * var(--m)) solid transparent;
+
+  /* относительное позиционирование элементов */
+  position: relative;
+
+  /* цвет текста */
+  color: orange;
+
+  /* шрифт */
+  font-family: "Space Grotesk";
+  /* размер шрифта */
+  font-size: var(--m);
+  /* радиус скругления кнопки */
+  border-radius: calc(0.7 * var(--m));
+  /* внутренний отступ текста от кнопки */
+  padding: calc(0.5 * var(--m)) calc(1 * var(--m));
+  /* гибкая вёрстка */
+  display: flex;
+  /* выравниваем содержимое по центру */
+  justify-content: center;
+  /* меняем курсор, который появится на кнопке */
+  cursor: pointer;
+  /* делаем фоновый градиент по границе кнопки */
+  background: linear-gradient(#121213, #121213),
+    linear-gradient(#121213 50%, rgba(18, 18, 19, 0.6) 80%, rgba(18, 18, 19, 0)),
+    linear-gradient(
+      90deg,
+      var(--orange),
+      var(--yellow),
+      var(--green),
+      var(--blue),
+      var(--purple),
+      var(--pink),
+      var(--red)
+    );
+  /* учитываем все границы и внутренние отступы для определения размера фона */
+  background-origin: border-box;
+  /* как мы обрезаем фон */
+  background-clip: padding-box, border-box, border-box;
+  /* растягиваем фоновый градиент */
+  background-size: 200%;
+  /* включаем анимацию */
+  animation: animate 2s infinite linear;
+}
+
+/* псевдоэлемент, который отвечает за фоновую подсветку */
+button::before {
+  /* добавляем пустой контент, чтобы появился блок */
+  content: "";
+  /* делаем фоновый градиент под кнопкой */
+  background: linear-gradient(
+    90deg,
+    var(--orange),
+    var(--yellow),
+    var(--green),
+    var(--blue),
+    var(--purple),
+    var(--pink),
+    var(--red)
+  );
+  /* высота и ширина градиента */
+  height: 30%;
+  width: 60%;
+  /* включаем абсолютное позиционирование */
+  position: absolute;
+  bottom: -20%;
+  /* сдвигаем градиент вниз относительно кнопки */
+  z-index: -5;
+  /* растягиваем фоновый градиент */
+  background-size: 200%;
+  /* запускаем анимацию */
+  animation: animate 2s infinite linear;
+  /* добавляем размытие к градиенту */
+  filter: blur(calc(1 * var(--m)));
+}
+
+/* действия при наведении мыши */
+button:hover,
+button:hover::before {
+  /* ускоряем анимацию */
+  animation: animate 0.5s infinite linear;
+}
+
+/* правила анимации */
+@keyframes animate {
+  /* учитываем растяжение фона в анимации */
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
